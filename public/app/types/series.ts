@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { DataSource } from './datasources';
 
 export enum LoadingState {
   NotStarted = 'NotStarted',
@@ -87,5 +88,14 @@ export interface DataQueryOptions {
 }
 
 export interface DataSourceApi {
+  /**
+   * Imports queries from a different datasource
+   */
+  importQueries?(queries: string[], origin: DataSource): Promise<string[]> | string[];
+  /**
+   * Initializes a datasource after instantiation
+   */
+  init?: () => void;
   query(options: DataQueryOptions): Promise<DataQueryResponse>;
+  testDatasource?: () => Promise<any>;
 }
