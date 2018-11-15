@@ -157,6 +157,13 @@ export default class LoggingLanguageProvider extends LanguageProvider {
     return { context, refresher, suggestions };
   }
 
+  async importQueries(queries: string[], datasourceType: string): Promise<string[]> {
+    if (datasourceType === 'prometheus') {
+      return Promise.all(queries.map(query => this.importPrometheusQuery(query)));
+    }
+    return queries.map(() => '');
+  }
+
   async importPrometheusQuery(query: string): Promise<string> {
     // Consider only first selector in query
     const selectorMatch = query.match(selectorRegexp);

@@ -113,10 +113,7 @@ export default class LoggingDatasource {
   }
 
   async importQueries(queries: string[], origin: DataSource): Promise<string[]> {
-    if (origin.meta.id === 'prometheus') {
-      return Promise.all(queries.map(query => this.languageProvider.importPrometheusQuery(query)));
-    }
-    return queries.map(() => '');
+    return this.languageProvider.importQueries(queries, origin.meta.id);
   }
 
   metadataRequest(url) {

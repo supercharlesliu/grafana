@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 import { DataSource } from 'app/types/datasources';
 import { ExploreState, ExploreUrlState, HistoryItem, Query, QueryTransaction, ResultType } from 'app/types/explore';
-import { RawTimeRange, DataSourceApi } from 'app/types/series';
+import { RawTimeRange } from 'app/types/series';
 import kbn from 'app/core/utils/kbn';
 import colors from 'app/core/utils/colors';
 import store from 'app/core/store';
@@ -161,7 +161,7 @@ export class Explore extends React.PureComponent<ExploreProps, ExploreState> {
     }
   }
 
-  async setDatasource(datasource: DataSource & DataSourceApi, origin?: DataSource) {
+  async setDatasource(datasource: any, origin?: DataSource) {
     const supportsGraph = datasource.meta.metrics;
     const supportsLogs = datasource.meta.logs;
     const supportsTable = datasource.meta.metrics;
